@@ -8,7 +8,7 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "hipblas-common";
-  version = "6.3.1";
+  version = "6.3.3";
   nativeBuildInputs = [
     cmake
     rocm-cmake
