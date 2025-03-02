@@ -31,9 +31,10 @@
   # depends on some previous commits.
   tensileSepArch ? true,
   tensileLazyLib ? true,
-  # TODO: ideally this can be turned off depending on `gpuTargets` as hipBLASLt
-  # only supports a small number of targets.
-  withHipBlasLt ? true,
+  # By default enable hipblaslt only if we're trageting an arch that it supports
+  withHipBlasLt ?
+    (builtins.any (lib.strings.hasPrefix "gfx9") gpuTargets)
+    || (builtins.any (lib.strings.hasPrefix "gfx11") gpuTargets),
   # `gfx940`, `gfx941` are not present in this list because they are early
   # engineering samples, and all final MI300 hardware are `gfx942`:
   # https://github.com/NixOS/nixpkgs/pull/298388#issuecomment-2032791130
@@ -58,7 +59,6 @@
   ),
 }:
 
-# FIXME: this derivation is ludicrously large, can we do anything about this?
 let
   gpuTargets' = lib.concatStringsSep ";" gpuTargets;
 in
