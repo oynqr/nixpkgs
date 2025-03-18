@@ -134,23 +134,5 @@ in
       stopIfChanged = false;
     };
 
-    services.nginx = mkIf cfg.enableNginx {
-      enable = true;
-
-      virtualHosts.${cfg.domain} = {
-        locations."/signalexchange.SignalExchange/".extraConfig = ''
-          # This is necessary so that grpc connections do not get closed early
-          # see https://stackoverflow.com/a/67805465
-          client_body_timeout 1d;
-
-          grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
-          grpc_pass grpc://localhost:${builtins.toString cfg.port};
-          grpc_read_timeout 1d;
-          grpc_send_timeout 1d;
-          grpc_socket_keepalive on;
-        '';
-      };
-    };
   };
 }
