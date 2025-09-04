@@ -1,6 +1,7 @@
 {
   lib,
   stdenv,
+  fetchpatch2,
   fetchFromGitHub,
   cmake,
   pkg-config,
@@ -41,6 +42,14 @@ stdenv.mkDerivation (finalAttrs: {
     rm -rf source/libraries/libnbtplusplus
     ln -s ${libnbtplusplus} source/libraries/libnbtplusplus
   '';
+
+  patches = [
+    (fetchpatch2 {
+      name = "jet2-holiday.patch";
+      url = "https://github.com/xz47sv/prismlauncher-patches/raw/238c957ced6b61f79cc1535407b4c6937c5d64ba/offline.patch";
+      hash = "sha256-J0Ui5+iaAhAa2lbFcUzeHiBfi54CcRi0Poyo0P0mMUE=";
+    })
+  ];
 
   # Ensure that instance shortucts point to our final wrapper, rather than this unwrapped version
   postPatch = ''
