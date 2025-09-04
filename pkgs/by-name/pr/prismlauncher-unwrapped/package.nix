@@ -28,13 +28,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "prismlauncher-unwrapped";
-  version = "11.1.0";
+  version = "11.1.0.0";
 
   src = fetchFromGitHub {
-    owner = "PrismLauncher";
-    repo = "PrismLauncher";
+    owner = "unmojang";
+    repo = "FjordLauncher";
     tag = finalAttrs.version;
-    hash = "sha256-bt2ofUj4PXWKNmdACMpXtbVWdNz1aBOUTrPnOsM7NCA=";
+    hash = "sha256-vIGRFWdY/vHBMlqJmCYv5BKIut3dx0fryqOmizZgy28=";
   };
 
   postUnpack = ''
@@ -107,7 +107,7 @@ stdenv.mkDerivation (finalAttrs: {
       Scrumplex
       getchoo
     ];
-    mainProgram = "prismlauncher";
+    mainProgram = "fjordlauncher";
     platforms = lib.platforms.linux ++ lib.platforms.darwin;
   };
 })
