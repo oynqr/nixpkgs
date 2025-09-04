@@ -134,7 +134,7 @@ symlinkJoin {
       "${placeholder "out"}/bin/prismlauncher"
 
       "--prefix"
-      "PRISMLAUNCHER_JAVA_PATHS"
+      "FJORDLAUNCHER_JAVA_PATHS"
       ":"
       (lib.makeSearchPath "bin/java" jdks)
     ]
