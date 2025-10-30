@@ -4,10 +4,7 @@
   flite,
   gamemode,
   glfw3-minecraft,
-  jdk17,
-  jdk21,
   jdk25,
-  jdk8,
   kdePackages,
   lib,
   libGL,
@@ -39,9 +36,6 @@
   gamemodeSupport ? stdenv.hostPlatform.isLinux,
   jdks ? [
     jdk25
-    jdk21
-    jdk17
-    jdk8
   ],
   msaClientID ? null,
   textToSpeechSupport ? stdenv.hostPlatform.isLinux,
