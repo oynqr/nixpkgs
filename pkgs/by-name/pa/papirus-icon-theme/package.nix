@@ -21,6 +21,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     hash = "sha256-ZmZefBzwtHVV49BUWgHihSnwGQbKFek3+HpUjjXJ36c=";
   };
 
+  patches = [ ./drop-vesktop-icon.patch ];
+
   nativeBuildInputs = [
     gtk3
     papirus-folders
