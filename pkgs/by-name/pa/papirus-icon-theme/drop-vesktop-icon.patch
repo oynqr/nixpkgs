@@ -1,0 +1,176 @@
+diff --git a/Papirus/16x16/apps/dev.vencord.Vesktop.svg b/Papirus/16x16/apps/dev.vencord.Vesktop.svg
+deleted file mode 120000
+index 28d43f63..00000000
+--- a/Papirus/16x16/apps/dev.vencord.Vesktop.svg
++++ /dev/null
+@@ -1 +0,0 @@
+-vesktop.svg
+\ No newline at end of file
+diff --git a/Papirus/16x16/apps/vesktop.svg b/Papirus/16x16/apps/vesktop.svg
+deleted file mode 100644
+index 6d8a452e..00000000
+--- a/Papirus/16x16/apps/vesktop.svg
++++ /dev/null
+@@ -1,12 +0,0 @@
+-<svg width="16" height="16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+- <path d="m0.02421876 13c0.19567628 1.695699 1.538495 3 3.1757812 3h9.6c1.637286 0 2.980105-1.304301 3.175781-3z" style="fill:#aa5bd5"/>
+- <path d="m3.2 0c-1.4963632 0-2.7465093 1.2710113-3.1 3h15.8c-0.353491-1.7289887-1.603637-3-3.1-3z" style="fill:#f04b5e"/>
+- <path d="m0.1 3c-0.06530356 0.319412-0.1 0.654454-0.1 1v1h16v-1c0-0.345546-0.0347-0.680588-0.1-1z" style="fill:#fd904c"/>
+- <rect y="5" width="16" height="3" style="fill:#facf50"/>
+- <rect y="8" width="16" height="3" style="fill:#3cc86d"/>
+- <path d="m3 3v3.5852108l0.1757812 0.4226196 2 1.99246h0.8484376l1.7998906-1.99246 0.1757812-0.4226196v-3.5852108h-0.9998906v3.3377096l-1.4 1.3947224-1.6-1.3947224v-3.3377096z" style="fill:none;stroke-linecap:square;stroke-width:2;stroke:#555555"/>
+- <path d="m 0,11 v 1.714286 C 0,12.811086 0.0080232,12.906434 0.0242188,13 H 15.975781 C 15.991977,12.906434 16,12.811081 16,12.714286 V 11 Z" style="fill:#5498f2"/>
+- <path d="m3 3v3.5852108l0.1757812 0.4226196 2 1.99246h0.8484376l1.7998906-1.99246 0.1757812-0.4226196v-3.5852108h-0.9998906v3.3377096l-1.4 1.3947224-1.6-1.3947224v-3.3377096z" style="fill:#ffffff"/>
+- <path d="m8 6v1h-1v4h1v1h4v-1h1v-1h-2v1h-2v-4h2v1h2v-1h-1v-1z" style="fill:none;stroke-width:2;stroke:#555555"/>
+- <path d="m8 6v1h-1v4h1v1h4v-1h1v-1h-2v1h-2v-4h2v1h2v-1h-1v-1z" style="fill:#ecb2c3"/>
+-</svg>
+diff --git a/Papirus/22x22/apps/dev.vencord.Vesktop.svg b/Papirus/22x22/apps/dev.vencord.Vesktop.svg
+deleted file mode 120000
+index 28d43f63..00000000
+--- a/Papirus/22x22/apps/dev.vencord.Vesktop.svg
++++ /dev/null
+@@ -1 +0,0 @@
+-vesktop.svg
+\ No newline at end of file
+diff --git a/Papirus/22x22/apps/vesktop.svg b/Papirus/22x22/apps/vesktop.svg
+deleted file mode 100644
+index 3eef0bea..00000000
+--- a/Papirus/22x22/apps/vesktop.svg
++++ /dev/null
+@@ -1,16 +0,0 @@
+-<svg width="22" height="22" version="1.1" xmlns="http://www.w3.org/2000/svg">
+- <rect x="1" y="1.5" width="20" height="20" ry="4" style="opacity:.2"/>
+- <path d="m1.0000001 15v2c0 0.345546 0.04337 0.680588 0.125 1h19.75c0.08163-0.319412 0.125-0.654454 0.125-1v-2z" style="fill:#5498f2"/>
+- <path d="m1.1250001 18c0.4419202 1.728988 2.0045461 3 3.875 3h12c1.870454 0 3.43308-1.271012 3.875-3z" style="fill:#aa5bd5"/>
+- <path d="m5.0000001 1c-1.870454 0-3.4331366 1.2710112-3.875 3h19.75c-0.441864-1.7289888-2.004546-3-3.875-3z" style="fill:#f04b5e"/>
+- <path d="m1.1250001 4c-0.081629 0.319412-0.125 0.654454-0.125 1v2h20v-2c0-0.345546-0.04337-0.680588-0.125-1z" style="fill:#fd904c"/>
+- <rect x="1" y="7" width="20" height="4" style="fill:#facf50"/>
+- <rect x="1" y="11" width="20" height="4" style="fill:#3cc86d"/>
+- <path d="m5.0000001 1c-2.216 0-4 1.784-4 4v0.5c0-2.216 1.784-4 4-4h12c2.216 0 4 1.784 4 4v-0.5c0-2.216-1.784-4-4-4z" style="fill:#ffffff;opacity:.2"/>
+- <path d="m4.0000001 5.5v5.003665l0.3300781 0.744686 2.5 2.251649h1.3398438l2.5-2.251649 0.330078-0.744686v-5.003665h-2v4.558026l-1.4999999 1.350598-1.5-1.350598v-4.558026z" style="fill:none;opacity:.1;stroke-linecap:square;stroke-width:2;stroke:#000000"/>
+- <path d="m4.0000001 5v5.003665l0.3300781 0.744686 2.5 2.251649h1.3398438l2.5-2.251649 0.330078-0.744686v-5.003665h-2v4.558026l-1.4999999 1.350598-1.5-1.350598v-4.558026z" style="fill:none;stroke-linecap:square;stroke-width:2;stroke:#555555"/>
+- <path d="m4.0000001 5v5.003665l0.3300781 0.744686 2.5 2.251649h1.3398438l2.5-2.251649 0.330078-0.744686v-5.003665h-2v4.558026l-1.4999999 1.350598-1.5-1.350598v-4.558026z" style="fill:#ffffff"/>
+- <path d="m11 7.5v2h-2v6h2v2h5v-2h2v-2h-3v2h-3v-6h3v2h3v-2h-2v-2z" style="fill:none;opacity:.1;stroke-width:2;stroke:#000000"/>
+- <path d="m11 7v2h-2v6h2v2h5v-2h2v-2h-3v2h-3v-6h3v2h3v-2h-2v-2z" style="fill:none;stroke-width:2;stroke:#555555"/>
+- <path d="m11 7v2h-2v6h2v2h5v-2h2v-2h-3v2h-3v-6h3v2h3v-2h-2v-2z" style="fill:#ecb2c3"/>
+-</svg>
+diff --git a/Papirus/24x24/apps/dev.vencord.Vesktop.svg b/Papirus/24x24/apps/dev.vencord.Vesktop.svg
+deleted file mode 120000
+index 28d43f63..00000000
+--- a/Papirus/24x24/apps/dev.vencord.Vesktop.svg
++++ /dev/null
+@@ -1 +0,0 @@
+-vesktop.svg
+\ No newline at end of file
+diff --git a/Papirus/24x24/apps/vesktop.svg b/Papirus/24x24/apps/vesktop.svg
+deleted file mode 100644
+index 621ade1c..00000000
+--- a/Papirus/24x24/apps/vesktop.svg
++++ /dev/null
+@@ -1,16 +0,0 @@
+-<svg width="24" height="24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+- <rect x="2" y="2.5" width="20" height="20" ry="4" style="opacity:.2"/>
+- <path d="m2 16v2c0 0.345546 0.04337 0.680588 0.125 1h19.75c0.081629-0.319412 0.125-0.654454 0.125-1v-2z" style="fill:#5498f2"/>
+- <path d="m2.125 19c0.4419202 1.728988 2.0045461 3 3.875 3h12c1.870454 0 3.43308-1.271012 3.875-3h-19.75z" style="fill:#aa5bd5"/>
+- <path d="m6 2c-1.870454 0-3.4331366 1.2710112-3.875 3h19.75c-0.441864-1.7289888-2.004546-3-3.875-3z" style="fill:#f04b5e"/>
+- <path d="m2.125 5c-0.0816294 0.319412-0.125 0.654454-0.125 1v2h20v-2c0-0.345546-0.04337-0.680588-0.125-1z" style="fill:#fd904c"/>
+- <rect x="2" y="8" width="20" height="4" style="fill:#facf50"/>
+- <rect x="2" y="12" width="20" height="4" style="fill:#3cc86d"/>
+- <path d="m6 2c-2.216 0-4 1.784-4 4v0.5c0-2.216 1.784-4 4-4h12c2.216 0 4 1.784 4 4v-0.5c0-2.216-1.784-4-4-4z" style="fill:#ffffff;opacity:.2"/>
+- <path d="m5 6.5v5.003665l0.3300781 0.744686 2.5 2.251649h1.3398438l2.5000001-2.251649 0.330078-0.744686v-5.003665h-2v4.558026l-1.5 1.350598-1.5-1.350598v-4.558026z" style="fill:none;opacity:.1;stroke-linecap:square;stroke-width:2;stroke:#000000"/>
+- <path d="m5 6v5.003665l0.3300781 0.744686 2.5 2.251649h1.3398438l2.5000001-2.251649 0.330078-0.744686v-5.003665h-2v4.558026l-1.5 1.350598-1.5-1.350598v-4.558026z" style="fill:none;stroke-linecap:square;stroke-width:2;stroke:#555555"/>
+- <path d="m5 6v5.003665l0.3300781 0.744686 2.5 2.251649h1.3398438l2.5000001-2.251649 0.330078-0.744686v-5.003665h-2v4.558026l-1.5 1.350598-1.5-1.350598v-4.558026z" style="fill:#ffffff"/>
+- <path d="m12 8.5v2h-2v6h2v2h5v-2h2v-2h-3v2h-3v-6h3v2h3v-2h-2v-2z" style="fill:none;opacity:.1;stroke-width:2;stroke:#000000"/>
+- <path d="m12 8v2h-2v6h2v2h5v-2h2v-2h-3v2h-3v-6h3v2h3v-2h-2v-2h-5z" style="fill:none;stroke-width:2;stroke:#555555"/>
+- <path d="m12 8v2h-2v6h2v2h5v-2h2v-2h-3v2h-3v-6h3v2h3v-2h-2v-2h-5z" style="fill:#ecb2c3"/>
+-</svg>
+diff --git a/Papirus/32x32/apps/dev.vencord.Vesktop.svg b/Papirus/32x32/apps/dev.vencord.Vesktop.svg
+deleted file mode 120000
+index 28d43f63..00000000
+--- a/Papirus/32x32/apps/dev.vencord.Vesktop.svg
++++ /dev/null
+@@ -1 +0,0 @@
+-vesktop.svg
+\ No newline at end of file
+diff --git a/Papirus/32x32/apps/vesktop.svg b/Papirus/32x32/apps/vesktop.svg
+deleted file mode 100644
+index 748a7219..00000000
+--- a/Papirus/32x32/apps/vesktop.svg
++++ /dev/null
+@@ -1,16 +0,0 @@
+-<svg width="32" height="32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+- <rect x="2" y="3" width="28" height="28" ry="5.5999999" style="opacity:.2"/>
+- <path d="m2.03125 25c0.2975719 2.818197 2.6687188 5 5.5683594 5h16.800782c2.89964 0 5.270787-2.181803 5.568359-5h-27.9375z" style="fill:#aa5bd5"/>
+- <path d="m7.5996094 2c-2.5459714 0-4.6838827 1.6820323-5.3691406 4h27.539062c-0.685258-2.3179677-2.823169-4-5.36914-4h-16.800782z" style="fill:#f04b5e"/>
+- <path d="M 2.2304688 6 C 2.0807039 6.5065978 2 7.0431808 2 7.5996094 L 2 11 L 30 11 L 30 7.5996094 C 30 7.0431808 29.919296 6.5065978 29.769531 6 L 2.2304688 6 z " style="fill:#fd904c"/>
+- <rect x="2" y="11" width="28" height="5" style="fill:#facf50"/>
+- <rect x="2" y="16" width="28" height="5" style="fill:#3cc86d"/>
+- <path d="m2 21v3.400391c0 0.202759 0.0104421 0.402545 0.03125 0.599609h27.9375c0.020808-0.197064 0.03125-0.39685 0.03125-0.599609v-3.400391h-28z" style="fill:#5498f2"/>
+- <path d="m7 9v6.773611l0.3076171 0.739584 3.4999999 3.486805h1.484766l3.399808-3.486805 0.307618-0.739584v-6.773611h-1.999809v6.340484l-2.45 2.440764-2.55-2.440764v-6.340484z" style="fill:none;opacity:.1;stroke-linecap:square;stroke-width:4;stroke:#000000"/>
+- <path d="m7 8v6.773611l0.3076171 0.739584 3.4999999 3.486805h1.484766l3.399808-3.486805 0.307618-0.739584v-6.773611h-1.999809v6.340484l-2.45 2.440764-2.55-2.440764v-6.340484z" style="fill:none;stroke-linecap:square;stroke-width:4;stroke:#555555"/>
+- <path d="m7 8v6.773611l0.3076171 0.739584 3.4999999 3.486805h1.484766l3.399808-3.486805 0.307618-0.739584v-6.773611h-1.999809v6.340484l-2.45 2.440764-2.55-2.440764v-6.340484z" style="fill:#ffffff"/>
+- <path d="m16 14v2h-2v7h2v2h7v-2h2v-2h-4v2h-3v-7h3v2h4v-2h-2v-2z" style="fill:none;opacity:.1;stroke-width:4;stroke:#000000"/>
+- <path d="m16 13v2h-2v7h2v2h7v-2h2v-2h-4v2h-3v-7h3v2h4v-2h-2v-2z" style="fill:none;stroke-width:4;stroke:#555555"/>
+- <path d="m16 13v2h-2v7h2v2h7v-2h2v-2h-4v2h-3v-7h3v2h4v-2h-2v-2z" style="fill:#ecb2c3"/>
+- <path d="M 7.5996094 2 C 4.4972094 2 2 4.4972094 2 7.5996094 L 2 8.5996094 C 2 5.4972094 4.4972094 3 7.5996094 3 L 24.400391 3 C 27.502791 3 30 5.4972094 30 8.5996094 L 30 7.5996094 C 30 4.4972094 27.502791 2 24.400391 2 L 7.5996094 2 z " style="fill:#ffffff;opacity:.2"/>
+-</svg>
+diff --git a/Papirus/48x48/apps/dev.vencord.Vesktop.svg b/Papirus/48x48/apps/dev.vencord.Vesktop.svg
+deleted file mode 120000
+index 28d43f63..00000000
+--- a/Papirus/48x48/apps/dev.vencord.Vesktop.svg
++++ /dev/null
+@@ -1 +0,0 @@
+-vesktop.svg
+\ No newline at end of file
+diff --git a/Papirus/48x48/apps/vesktop.svg b/Papirus/48x48/apps/vesktop.svg
+deleted file mode 100644
+index 3c2981cd..00000000
+--- a/Papirus/48x48/apps/vesktop.svg
++++ /dev/null
+@@ -1,16 +0,0 @@
+-<svg width="48" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg">
+- <rect x="4" y="5" width="40" height="40" ry="8" style="opacity:.2"/>
+- <path d="m4.0605469 37c0.4891907 3.956631 3.8462375 7 7.9394531 7h24c4.093216 0 7.450262-3.043369 7.939453-7h-39.878906z" style="fill:#aa5bd5"/>
+- <path d="m12 4c-3.7409079 0-6.8662732 2.5420224-7.75 6h39.5c-0.883727-3.4579776-4.009092-6-7.75-6h-24z" style="fill:#f04b5e"/>
+- <path d="m4.25 10c-0.1632589 0.638824-0.25 1.308908-0.25 2v4h40v-4c0-0.691092-0.086741-1.361176-0.25-2h-39.5z" style="fill:#fd904c"/>
+- <rect x="4" y="16" width="40" height="7" style="fill:#facf50"/>
+- <rect x="4" y="23" width="40" height="7" style="fill:#3cc86d"/>
+- <path d="m4 30v6c0 0.338784 0.0200579 0.67252 0.0605469 1h39.878906c0.040489-0.32748 0.060547-0.661216 0.060547-1v-6h-40z" style="fill:#5498f2"/>
+- <path d="m12 4c-4.432 0-8 3.568-8 8v1c0-4.432 3.568-8 8-8h24c4.432 0 8 3.568 8 8v-1c0-4.432-3.568-8-8-8h-24z" style="fill:#ffffff;opacity:.2"/>
+- <path d="m11 13v9.962301l0.439453 1.056549 5 4.98115h2.121094l5-4.98115 0.439453-1.056549v-9.962301h-3v9.343548l-3.5 3.486806-3.5-3.486806v-9.343548z" style="fill:none;opacity:.1;stroke-linecap:square;stroke-width:4;stroke:#000000"/>
+- <path d="m11 12v9.962301l0.439453 1.056549 5 4.98115h2.121094l5-4.98115 0.439453-1.056549v-9.962301h-3v9.343548l-3.5 3.486806-3.5-3.486806v-9.343548z" style="fill:none;stroke-linecap:square;stroke-width:4;stroke:#555555"/>
+- <path d="m11 12v9.962301l0.439453 1.056549 5 4.98115h2.121094l5-4.98115 0.439453-1.056549v-9.962301h-3v9.343548l-3.5 3.486806-3.5-3.486806v-9.343548z" style="fill:#ffffff"/>
+- <path d="m24 20v3h-3v10h3v3h10v-3h3v-3h-5v3h-6v-10h6v3h5v-3h-3v-3z" style="fill:none;opacity:.1;stroke-width:4;stroke:#000000"/>
+- <path d="m24 19v3h-3v10h3v3h10v-3h3v-3h-5v3h-6v-10h6v3h5v-3h-3v-3h-10z" style="fill:none;stroke-width:4;stroke:#555555"/>
+- <path d="m24 19v3h-3v10h3v3h10v-3h3v-3h-5v3h-6v-10h6v3h5v-3h-3v-3h-10z" style="fill:#ecb2c3"/>
+-</svg>
+diff --git a/Papirus/64x64/apps/dev.vencord.Vesktop.svg b/Papirus/64x64/apps/dev.vencord.Vesktop.svg
+deleted file mode 120000
+index 28d43f63..00000000
+--- a/Papirus/64x64/apps/dev.vencord.Vesktop.svg
++++ /dev/null
+@@ -1 +0,0 @@
+-vesktop.svg
+\ No newline at end of file
+diff --git a/Papirus/64x64/apps/vesktop.svg b/Papirus/64x64/apps/vesktop.svg
+deleted file mode 100644
+index d3959d70..00000000
+--- a/Papirus/64x64/apps/vesktop.svg
++++ /dev/null
+@@ -1,16 +0,0 @@
+-<svg width="64" height="64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+- <rect x="4" y="5" width="56" height="56" ry="11.2" style="opacity:.2"/>
+- <path d="m4.0625 50c0.5951437 5.636393 5.3374377 10 11.136719 10h33.601562c5.799281 0 10.541575-4.363607 11.136719-10h-55.875z" style="fill:#aa5bd5"/>
+- <path d="m15.199219 4c-5.4513728 0-9.967617 3.8557516-10.984375 9h55.570312c-1.016758-5.1442484-5.533002-9-10.984375-9h-33.601562z" style="fill:#f04b5e"/>
+- <path d="m4.2148438 13c-0.1405249 0.71098-0.2148438 1.445791-0.2148438 2.199219v6.800781h56v-6.800781c0-0.753428-0.074319-1.488239-0.214844-2.199219h-55.570312z" style="fill:#fd904c"/>
+- <rect x="4" y="22" width="56" height="10" style="fill:#facf50"/>
+- <rect x="4" y="32" width="56" height="9" style="fill:#3cc86d"/>
+- <path d="m4 41v7.800781c0 0.405519 0.0208842 0.80509 0.0625 1.199219h55.875c0.041616-0.394129 0.0625-0.7937 0.0625-1.199219v-7.800781h-56z" style="fill:#5498f2"/>
+- <path d="m14 17v13.547221l0.615234 1.479169 7 6.97361h2.969532l6.799617-6.97361 0.615234-1.479169v-13.547221h-3.999617v12.680967l-4.9 5.081033-5.1-5.081033v-12.680967z" style="fill:none;opacity:.1;stroke-linecap:square;stroke-width:6;stroke:#000000"/>
+- <path d="m14 16v13.547221l0.615234 1.479169 7 6.97361h2.969532l6.799617-6.97361 0.615234-1.479169v-13.547221h-3.999617v12.680967l-4.9 5.081033-5.1-5.081033v-12.680967z" style="fill:none;stroke-linecap:square;stroke-width:6;stroke:#555555"/>
+- <path d="m14 16v13.547221l0.615234 1.479169 7 6.97361h2.969532l6.799617-6.97361 0.615234-1.479169v-13.547221h-3.999617v12.680967l-4.9 5.081033-5.1-5.081033v-12.680967z" style="fill:#ffffff"/>
+- <path d="m32 26v4h-4v14h4v4h14v-4h4v-4h-7v4h-8v-14h8v4h7v-4h-4v-4z" style="fill:none;opacity:.1;stroke-width:6;stroke:#000000"/>
+- <path d="m32 25v4h-4v14h4v4h14v-4h4v-4h-7v4h-8v-14h8v4h7v-4h-4v-4z" style="fill:none;stroke-width:6;stroke:#555555"/>
+- <path d="m32 25v4h-4v14h4v4h14v-4h4v-4h-7v4h-8v-14h8v4h7v-4h-4v-4z" style="fill:#ecb2c3"/>
+- <path d="M 15.199219 4 C 8.9944189 4 4 8.9944189 4 15.199219 L 4 16.199219 C 4 9.9944189 8.9944189 5 15.199219 5 L 48.800781 5 C 55.005581 5 60 9.9944189 60 16.199219 L 60 15.199219 C 60 8.9944189 55.005581 4 48.800781 4 L 15.199219 4 z " style="fill:#ffffff;opacity:.2"/>
+-</svg>
