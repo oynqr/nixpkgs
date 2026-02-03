@@ -4,7 +4,7 @@
   libGL,
   makeWrapper,
   openal,
-  openjdk17,
+  openjdk25,
   stdenv,
   libxxf86vm,
   xrandr,
@@ -13,7 +13,7 @@
   writeScript,
 }:
 let
-  openjdk = openjdk17;
+  openjdk = openjdk25;
 in
 stdenv.mkDerivation rec {
   pname = "starsector";
@@ -86,6 +86,11 @@ stdenv.mkDerivation rec {
     substituteInPlace starsector.sh \
       --replace-fail "./jre_linux/bin/java" "${lib.getExe openjdk}" \
       --replace-fail "./native/linux" "$out/share/starsector/native/linux" \
+      --replace-fail "-XX:+UseShenandoahGC" "-XX:+UseZGC" \
+      --replace-fail "-XX:ShenandoahGCMode=iu" "-XX:+ZGenerational" \
+      --replace-fail "-XX:ShenandoahGCHeuristics=compact" "" \
+      --replace-fail "-XX:ShenandoahAllocationThreshold=85" "" \
+      --replace-fail "-XX:ShenandoahGuaranteedGCInterval=0" "" \
       --replace-fail "./compiler_directives.txt" "$out/share/starsector/compiler_directives.txt" \
       --replace-fail "=." "=\''${XDG_DATA_HOME:-\$HOME/.local/share}/starsector" \
       --replace-fail "com.fs.starfarer.StarfarerLauncher" "\"\$@\" com.fs.starfarer.StarfarerLauncher"
