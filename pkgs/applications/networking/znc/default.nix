@@ -19,6 +19,8 @@
   zlib,
   withIPv6 ? true,
   withDebug ? false,
+  withArgon2 ? true,
+  libargon2,
   testers,
 }:
 
@@ -53,7 +55,8 @@ stdenv.mkDerivation (finalAttrs: {
   ++ lib.optional withTcl tcl
   ++ lib.optional withCyrus cyrus_sasl
   ++ lib.optional withUnicode icu
-  ++ lib.optional withZlib zlib;
+  ++ lib.optional withZlib zlib
+  ++ lib.optional withArgon2 libargon2;
 
   configureFlags = [
     (lib.enableFeature withPerl "perl")
