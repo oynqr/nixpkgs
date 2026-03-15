@@ -327,7 +327,58 @@ let
         ++ lib.optionals data.ocspMustStaple [ "--must-staple" ]
         ++ lib.optionals (data.profile != null) [ "--profile=${data.profile}" ]
         ++ data.extraLegoRenewFlags
+        ++ lib.optionals data.tlsa.enable [ "--reuse-key" ]
       );
+
+      # TLSA DNS owner name: _<port>._<proto>.<domain>
+      tlsaName = "_${toString data.tlsa.port}._${data.tlsa.protocol}.${data.domain}";
+
+      # openssl genpkey arguments derived from lego's keyType string.
+      # Supported: ec256, ec384, rsa2048, rsa4096, rsa8192.
+      tlsaGenKeyArgs =
+        if lib.hasPrefix "ec" data.keyType then
+          "-algorithm EC -pkeyopt ec_paramgen_curve:P-${lib.removePrefix "ec" data.keyType}"
+        else if lib.hasPrefix "rsa" data.keyType then
+          "-algorithm RSA -pkeyopt rsa_keygen_bits:${lib.removePrefix "rsa" data.keyType}"
+        else
+          "-algorithm EC -pkeyopt ec_paramgen_curve:P-256";
+
+      # Shell fragment: print the SPKI SHA-256 fingerprint of a PEM private key.
+      tlsaSpkiHash = keyFile: ''
+        _spki_raw=$(openssl pkey -in ${keyFile} -pubout 2>/dev/null \
+          | openssl dgst -sha256 -r)
+        echo -n "''${_spki_raw%% *}"
+      '';
+
+      # Shell fragment: generate a fresh private key.
+      # Runs as the acme user (no chown needed; the file is created in a
+      # directory already owned by acme).
+      tlsaGenKey = dest: ''
+        openssl genpkey ${tlsaGenKeyArgs} -out ${dest} 2>/dev/null
+        chmod 640 ${dest}
+      '';
+
+      # Shell fragment inlined into the main script's new-cert block.
+      # Runs as the acme user inside PrivateTmp; cwd is /tmp.
+      # The permission fix-up loop that follows covers out/tlsa-next.key.
+      tlsaPostFragment = ''
+        # The former next key is now the live key. Generate a fresh next key
+        # so the following renewal cycle has a new hash to pre-publish.
+        echo "acme-tlsa: generating new next key for '${cert}'"
+        ${tlsaGenKey "out/tlsa-next.key"}
+
+        CURRENT_HASH=$(${tlsaSpkiHash "out/key.pem"})
+        NEXT_HASH=$(${tlsaSpkiHash "out/tlsa-next.key"})
+        echo "acme-tlsa: current SPKI hash: $CURRENT_HASH"
+        echo "acme-tlsa: next SPKI hash: $NEXT_HASH"
+
+        cf_tlsa_publish \
+          --zone ${lib.escapeShellArg data.tlsa.zone} \
+          --tlsa-name ${lib.escapeShellArg tlsaName} \
+          --ttl ${toString data.tlsa.ttl} \
+          --current-hash "$CURRENT_HASH" \
+          --next-hash "$NEXT_HASH"
+      '';
 
       certificateKey = if data.csrKey != null then "${data.csrKey}" else "certificates/${keyName}.key";
     in
@@ -459,12 +510,15 @@ let
         # Ensure that certificates are generated if people use `security.acme.certs`
         # without having/declaring other systemd units that depend on the cert.
 
-        path = with pkgs; [
-          lego
-          coreutils
-          diffutils
-          openssl
-        ];
+        path =
+          with pkgs;
+          [
+            lego
+            coreutils
+            diffutils
+            openssl
+          ]
+          ++ lib.optionals data.tlsa.enable [ pkgs.cf_tlsa_publish ];
 
         serviceConfig =
           commonServiceConfig
@@ -586,6 +640,15 @@ let
               if (data.email != null) then data.email else placeholderEmail
             }.key')" ];
           then
+            ${lib.optionalString data.tlsa.enable ''
+              # Install the pre-generated next key so --reuse-key issues the
+              # new certificate bound to it, rotating to the pre-published key.
+              if [ -f "out/tlsa-next.key" ]; then
+                echo "acme-tlsa: installing next key as lego key for '${cert}'"
+                cp -p "out/tlsa-next.key" '${certificateKey}'
+                chmod 600 '${certificateKey}'
+              fi
+            ''}
             # Even if a cert is not expired, it may be revoked by the CA.
             # Try to renew, and silently fail if the cert is not expired.
             # Avoids #85794 and resolves #129838
@@ -626,6 +689,7 @@ let
             cp -vp 'certificates/${keyName}.issuer.crt' out/chain.pem
             ln -sf fullchain.pem out/cert.pem
             cat out/key.pem out/fullchain.pem > out/full.pem
+            ${lib.optionalString data.tlsa.enable tlsaPostFragment}
           fi
 
           # Keep permissions consistent. Needs to be in sync with the other scripts.
@@ -902,6 +966,45 @@ let
         user = lib.mkOption {
           visible = false;
           default = "_mkRemovedOptionModule";
+        };
+
+        tlsa = {
+          enable = lib.mkEnableOption "DANE TLSA record management for this certificate";
+
+          zone = lib.mkOption {
+            type = lib.types.str;
+            example = "example.com";
+            description = ''
+              The Cloudflare DNS zone name in which to create TLSA records.
+              Must be the zone that contains {option}`domain`.
+            '';
+          };
+
+          port = lib.mkOption {
+            type = lib.types.port;
+            default = 443;
+            example = 25;
+            description = ''
+              TCP/UDP port number for the TLSA owner name.
+              The record will be published as `_<port>._<protocol>.<domain>`.
+            '';
+          };
+
+          protocol = lib.mkOption {
+            type = lib.types.enum [
+              "tcp"
+              "udp"
+              "sctp"
+            ];
+            default = "tcp";
+            description = "Transport protocol for the TLSA owner name.";
+          };
+
+          ttl = lib.mkOption {
+            type = lib.types.ints.between 60 86400;
+            default = 3600;
+            description = "TTL in seconds for the published TLSA DNS records.";
+          };
         };
 
         # allowKeysForGroup option has been removed
@@ -1203,6 +1306,13 @@ in
               ) certs;
               message = ''
                 When passing a certificate signing request both `security.acme.certs.${cert}.csr` and `security.acme.certs.${cert}.csrKey` need to be set.
+              '';
+            }
+
+            {
+              assertion = !data.tlsa.enable || data.tlsa.zone != "";
+              message = ''
+                `security.acme.certs.${cert}.tlsa.zone` must be set when TLSA is enabled.
               '';
             }
           ]) cfg.certs
