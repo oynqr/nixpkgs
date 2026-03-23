@@ -345,7 +345,7 @@ let
 
       # Shell fragment: print the SPKI SHA-256 fingerprint of a PEM private key.
       tlsaSpkiHash = keyFile: ''
-        _spki_raw=$(openssl pkey -in ${keyFile} -pubout 2>/dev/null \
+        _spki_raw=$(openssl pkey -in ${keyFile} -pubout -outform DER 2>/dev/null \
           | openssl dgst -sha256 -r)
         echo -n "''${_spki_raw%% *}"
       '';
