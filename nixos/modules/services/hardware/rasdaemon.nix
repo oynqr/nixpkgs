@@ -2,14 +2,26 @@
   config,
   lib,
   pkgs,
+  utils,
   ...
 }:
 let
 
   cfg = config.hardware.rasdaemon;
 
+  labelsFile = "/etc/ras/dimm_labels.d/labels";
+  configFile = "/etc/sysconfig/rasdaemon";
+
+  registerLabels = cfg.labels != "" || cfg.vendor != null || cfg.model != null;
 in
 {
+  imports = [
+    (lib.mkRemovedOptionModule [ "hardware" "rasdaemon" "mainboard" ] ''
+      rasdaemon >= 1.0.0 no longer reads /etc/ras/mainboard.
+      Use hardware.rasdaemon.vendor and hardware.rasdaemon.model instead.
+    '')
+  ];
+
   meta = {
     inherit (pkgs.rasdaemon.meta) maintainers;
   };
@@ -23,40 +35,46 @@ in
     record = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "record events via sqlite3, required for ras-mc-ctl";
+      description = "Record events via sqlite3, required for {command}`ras-mc-ctl`.";
     };
 
-    mainboard = lib.mkOption {
-      type = lib.types.lines;
-      default = "";
-      description = "Custom mainboard description, see {manpage}`ras-mc-ctl(8)` for more details.";
-      example = ''
-        vendor = ASRock
-        model = B450M Pro4
-
-        # it should default to such values from
-        # /sys/class/dmi/id/board_[vendor|name]
-        # alternatively one can supply a script
-        # that returns the same format as above
-
-        script = <path to script>
+    vendor = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "ASRock";
+      description = ''
+        Mainboard vendor used to look up DIMM labels, passed to
+        {command}`ras-mc-ctl dimm` as `--vendor`. When `null`, the value from
+        {file}`/sys/class/dmi/id/board_vendor` is used.
       '';
     };
 
-    # TODO, accept `rasdaemon.labels = " ";` or `rasdaemon.labels = { dell = " "; asrock = " "; };'
+    model = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "B450M Pro4";
+      description = ''
+        Mainboard model used to look up DIMM labels, passed to
+        {command}`ras-mc-ctl dimm` as `--model`. When `null`, the value from
+        {file}`/sys/class/dmi/id/board_name` is used.
+      '';
+    };
 
     labels = lib.mkOption {
       type = lib.types.lines;
       default = "";
-      description = "Additional memory module label descriptions to be placed in /etc/ras/dimm_labels.d/labels";
+      description = ''
+        Memory module label descriptions, written to {file}`${labelsFile}`
+        and registered on startup via {command}`ras-mc-ctl dimm --register-labels`.
+      '';
       example = ''
-        # vendor and model may be shown by 'ras-mc-ctl --mainboard'
+        # vendor and model may be shown by `ras-mc-ctl dimm --mainboard`
         vendor: ASRock
           product: To Be Filled By O.E.M.
           model: B450M Pro4
             # these labels are names for the motherboard slots
-            # the numbers may be shown by `ras-mc-ctl --error-count`
-            # they are mc:csrow:channel
+            # the numbers may be shown by `ras-mc-ctl dimm --error-count`
+            # they are mc.csrow.channel
             DDR4_A1: 0.2.0;  DDR4_B1: 0.2.1;
             DDR4_A2: 0.3.0;  DDR4_B2: 0.3.1;
       '';
@@ -66,8 +84,8 @@ in
       type = lib.types.lines;
       default = "";
       description = ''
-        rasdaemon configuration, currently only used for CE PFA
-        for details, read rasdaemon.outPath/etc/sysconfig/rasdaemon's comments
+        rasdaemon configuration, currently only used for CE PFA.
+        See the comments in {file}`''${pkgs.rasdaemon}/etc/sysconfig/rasdaemon` for details.
       '';
       example = ''
         # defaults from included config
@@ -80,7 +98,7 @@ in
     extraModules = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
-      description = "extra kernel modules to load";
+      description = "Extra kernel modules to load.";
       example = [ "i7core_edac" ];
     };
 
@@ -90,10 +108,6 @@ in
   config = lib.mkIf cfg.enable {
 
     environment.etc = {
-      "ras/mainboard" = {
-        enable = cfg.mainboard != "";
-        text = cfg.mainboard;
-      };
       # TODO, handle multiple cfg.labels.brand = " ";
       "ras/dimm_labels.d/labels" = {
         enable = cfg.labels != "";
@@ -107,7 +121,7 @@ in
     environment.systemPackages = [
       cfg.package
     ]
-    ++ lib.optionals (cfg.testing) (
+    ++ lib.optionals cfg.testing (
       with pkgs.error-inject;
       [
         edac-inject
@@ -118,9 +132,7 @@ in
 
     boot.initrd.kernelModules =
       cfg.extraModules
-      ++ lib.optionals (cfg.testing) [
-        # edac_core and amd64_edac should get loaded automatically
-        # i7core_edac may not be, and may not be required, but should load successfully
+      ++ lib.optionals cfg.testing [
         "edac_core"
         "amd64_edac"
         "i7core_edac"
@@ -128,7 +140,7 @@ in
         "aer-inject"
       ];
 
-    boot.kernelPatches = lib.optionals (cfg.testing) [
+    boot.kernelPatches = lib.optionals cfg.testing [
       {
         name = "rasdaemon-tests";
         patch = null;
@@ -155,10 +167,14 @@ in
         wantedBy = [ "multi-user.target" ];
 
         serviceConfig = {
-          StateDirectory = lib.optionalString (cfg.record) "rasdaemon";
-
-          ExecStart =
-            "${cfg.package}/bin/rasdaemon --foreground" + lib.optionalString (cfg.record) " --record";
+          StateDirectory = lib.optionalString cfg.record "rasdaemon";
+          ExecStart = utils.escapeSystemdExecArgs (
+            [
+              "${cfg.package}/bin/rasdaemon"
+              "--foreground"
+            ]
+            ++ lib.optional cfg.record "--record"
+          );
           ExecStop = "${cfg.package}/bin/rasdaemon --disable";
           Restart = "on-abort";
 
@@ -168,14 +184,39 @@ in
           # and everything seems to be enabled without this...
         };
       };
-      ras-mc-ctl = lib.mkIf (cfg.labels != "") {
+      ras-mc-ctl = lib.mkIf registerLabels {
         description = "register DIMM labels on startup";
         documentation = [ "man:ras-mc-ctl(8)" ];
         wantedBy = [ "multi-user.target" ];
+        restartTriggers = lib.optional (
+          cfg.labels != ""
+        ) config.environment.etc."ras/dimm_labels.d/labels".source;
         serviceConfig = {
           Type = "oneshot";
-          ExecStart = "${cfg.package}/bin/ras-mc-ctl dimm --register-labels";
           RemainAfterExit = true;
+          ExecStart = utils.escapeSystemdExecArgs (
+            [ "${cfg.package}/bin/ras-mc-ctl" ]
+            ++ lib.optionals (cfg.config != "") [
+              "--config"
+              configFile
+            ]
+            ++ [
+              "dimm"
+              "--register-labels"
+            ]
+            ++ lib.optionals (cfg.labels != "") [
+              "--labeldb"
+              labelsFile
+            ]
+            ++ lib.optionals (cfg.vendor != null) [
+              "--vendor"
+              cfg.vendor
+            ]
+            ++ lib.optionals (cfg.model != null) [
+              "--model"
+              cfg.model
+            ]
+          );
         };
       };
     };
