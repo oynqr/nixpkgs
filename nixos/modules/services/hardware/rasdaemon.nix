@@ -166,7 +166,12 @@ in
         documentation = [ "man:rasdaemon(1)" ];
         wantedBy = [ "multi-user.target" ];
 
+        unitConfig.RequiresMountsFor = "/sys/kernel/debug";
+        restartTriggers = lib.optional (
+          cfg.config != ""
+        ) config.environment.etc."sysconfig/rasdaemon".source;
         serviceConfig = {
+          EnvironmentFile = lib.mkIf (cfg.config != "") configFile;
           StateDirectory = lib.optionalString cfg.record "rasdaemon";
           ExecStart = utils.escapeSystemdExecArgs (
             [
