@@ -15,6 +15,7 @@
   libxi,
   libxrandr,
   wayland,
+  writableTmpDirAsHomeHook,
   dbus,
   nix-update-script,
 }:
@@ -97,6 +98,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
   postFixup = lib.optionalString stdenv.hostPlatform.isLinux ''
     patchelf --add-rpath ${lib.makeLibraryPath runtimeDeps} $out/bin/gridcraft
   '';
+
+  nativeCheckInputs = [ writableTmpDirAsHomeHook ];
 
   nativeInstallCheckInputs = [ versionCheckHook ];
   doInstallCheck = true;
