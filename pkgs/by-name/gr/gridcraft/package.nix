@@ -99,6 +99,12 @@ rustPlatform.buildRustPackage (finalAttrs: {
     patchelf --add-rpath ${lib.makeLibraryPath runtimeDeps} $out/bin/gridcraft
   '';
 
+  checkFlags = [
+    # The pinned integration-test fonts lack these Unicode glyphs.
+    "--skip=interaction::column_autocomplete_folds_case_beyond_ascii"
+    "--skip=interaction::language_switch_renders_the_ribbon_and_persists"
+  ];
+
   nativeCheckInputs = [ writableTmpDirAsHomeHook ];
 
   nativeInstallCheckInputs = [ versionCheckHook ];
