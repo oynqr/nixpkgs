@@ -83,7 +83,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     mkdir -p $out/share/icons
     cp -R assets/app-icon/hicolor $out/share/icons/
     install -Dm644 packaging/linux/ai.storyteller.gridcraft.desktop \
-      $out/share/applications/
+      $out/share/applications/ai.storyteller.gridcraft.desktop
   ''
   + lib.optionalString stdenv.hostPlatform.isLinux ''
     install -Dm644 packaging/linux/ai.storyteller.gridcraft.mime.xml $out/share/mime/packages/ai.storyteller.gridcraft.xml
