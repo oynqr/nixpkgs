@@ -48,7 +48,11 @@ rustPlatform.buildRustPackage (finalAttrs: {
     hash = "sha256-L1kbIku3WX/7pU/DpTqy2A2yT/+7vQVoK+iUYf5Dkpk=";
   };
 
-  cargoHash = "sha256-gudikEONztiu7cfkt87CTIydKQEfPNgvRBTobzXz3qM=";
+  cargoPatches = [
+    ./remove-unused-egui-patches.patch
+  ];
+
+  cargoHash = "sha256-MBt0bJ07q0CdG4r5urS4nu+wL/tMWOeLJJrzsZ4/Co4=";
 
   # The mac_menu_appkit test starts a real NSApplication, and AppKit aborts in the build
   # sandbox ("required built-in appearance SystemAppearance not found").
