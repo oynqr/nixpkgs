@@ -263,6 +263,7 @@ in
   age-plugin-tpm-decrypt = runTest ./age-plugin-tpm-decrypt.nix;
   agnos = discoverTests (import ./agnos.nix);
   agorakit = runTest ./web-apps/agorakit.nix;
+  aiostreams = runTest ./aiostreams.nix;
   airsonic = runTest ./airsonic.nix;
   akkoma = runTestOn [ "x86_64-linux" "aarch64-linux" ] {
     imports = [ ./akkoma.nix ];

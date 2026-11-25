@@ -10,6 +10,7 @@
   jq,
   makeWrapper,
   nix-update-script,
+  nixosTests,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -77,7 +78,10 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru = {
+    updateScript = nix-update-script { };
+    tests = { inherit (nixosTests) aiostreams; };
+  };
 
   meta = {
     description = "Consolidates multiple Stremio addons and debrid services into a single addon";
