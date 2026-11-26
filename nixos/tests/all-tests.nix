@@ -1755,6 +1755,7 @@ in
   stirling-pdf = runTest ./stirling-pdf.nix;
   stirling-pdf-desktop = runTest ./stirling-pdf-desktop.nix;
   stratis = handleTest ./stratis { };
+  stremthru = runTest ./stremthru.nix;
   strichliste = runTest ./web-apps/strichliste.nix;
   strongswan-swanctl = runTest ./strongswan-swanctl.nix;
   stub-ld = handleTestOn [ "x86_64-linux" "aarch64-linux" ] ./stub-ld.nix { };

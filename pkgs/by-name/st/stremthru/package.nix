@@ -11,6 +11,7 @@
   gitMinimal,
   ffmpeg-headless,
   nix-update-script,
+  nixosTests,
 }:
 
 buildGoModule (finalAttrs: {
@@ -94,7 +95,10 @@ buildGoModule (finalAttrs: {
       }
   '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru = {
+    updateScript = nix-update-script { };
+    tests = { inherit (nixosTests) stremthru; };
+  };
 
   meta = {
     description = "Companion for Stremio";

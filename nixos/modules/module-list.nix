@@ -1035,6 +1035,7 @@
   ./services/misc/spoolman.nix
   ./services/misc/sssd.nix
   ./services/misc/stash-clipboard.nix
+  ./services/misc/stremthru.nix
   ./services/misc/subsonic.nix
   ./services/misc/sundtek.nix
   ./services/misc/svnserve.nix
