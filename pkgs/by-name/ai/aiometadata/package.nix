@@ -9,6 +9,7 @@
   makeWrapper,
   autoPatchelfHook,
   nix-update-script,
+  nixosTests,
 }:
 
 buildNpmPackage (finalAttrs: {
@@ -75,7 +76,10 @@ buildNpmPackage (finalAttrs: {
     autoPatchelf $out/lib/aiometadata/node_modules/@antoniomuso
   '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru = {
+    updateScript = nix-update-script { };
+    tests = { inherit (nixosTests) aiometadata; };
+  };
 
   meta = {
     description = "Metadata provider addon for Stremio";
